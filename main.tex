@@ -1,0 +1,219 @@
+\documentclass[a4paper]{article}
+
+\input{./preambles/preamble}
+\usetikzlibrary{external,
+angles,
+decorations.pathmorphing,
+calc,intersections,through,backgrounds,
+decorations.pathreplacing,
+patterns,shadings,
+arrows,
+shapes.geometric}
+% save compiled tikz plots; enable --shell-escape
+\tikzexternalize[prefix=./tikz/]
+% Sebastian did it
+\usepackage[outline]{contour}
+\contourlength{2pt}
+
+\input{./preambles/unicode}
+
+\setdefaultlanguage{english}
+\setotherlanguages{german,french,italian,greek,latin,russian}
+\setmainfont{CMU Serif}
+\setsansfont{CMU Sans Serif}
+% \newfontfamily{\greekfont}{CMU Serif}
+% \newfontfamily{\greekfontsf}{CMU Sans Serif}
+
+\input{./preambles/math-single}
+\input{./preambles/math-brac}
+\input{./preambles/math-thm}
+\input{./preambles/phys-chem}
+
+\newcommand{\RomaN}[1]{%
+  \textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+\usepackage[
+	bibencoding  = auto,
+	backend      = biber,
+	sorting      = nyt,
+	sortlocale   = auto,
+	hyperref     = true,
+	backref      = true,
+	style        = phys,
+	doi          = false,
+	eprint       = true,
+	isbn         = true,
+	url          = true,
+	subentry     = true,
+	articletitle = true,
+	biblabel     = brackets,
+	chaptertitle = true,
+	pageranges   = true,
+	%refsegment   = section,
+]{biblatex}
+\addbibresource{main.bib}
+
+%\input{./preambles/biblatex-user}
+
+% \setcounter{secnumdepth}{6}
+% So that paragraph is also numbered
+
+\numberwithin{equation}{subsection}
+
+\title{Wightman function of Klein--Fock--Gordon field}
+\author{Yi-Fan Wang}
+
+
+\begin{document}
+\maketitle
+
+%\begin{abstract}
+%Your abstract.
+%\end{abstract}
+
+\tableofcontents
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Covariant differential}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+$\phi$ a $\BbbC$-valued $0$-form
+\begin{align}
+\DD\phi \coloneqq \rbr{\dd - \ii e A}\wedge \phi,
+\qquad
+\DD\phi^* \coloneqq \rbr{\dd + \ii e A}\wedge \phi^*,
+\end{align}
+$A$ the $\mfraku(1)$-valued connection form.
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Covariant codifferential}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+
+Define the covariant codifferential of a $\BbbC$-valued $k$-form $\zeta$ as 
+follows. Let $\eta$ be an arbitrary $\BbbC$-valued $(k-1)$-form.
+\begin{align}
+\int \dd\rbr{\eta^* \wedge \star \zeta} &\equiv
+\int \dd \eta^* \wedge \star \zeta - (-)^{k} \eta^* \wedge \dd\star\zeta
+\eqqcolon
+\int \DD \eta^* \wedge \star \zeta - \eta^* \wedge \star\DD^{\dagger}\zeta
+\\
+&=
+\int \DD \eta^* \wedge \star \zeta - \ii e A \wedge \eta^* \wedge \star \zeta -
+	(-)^{k} \eta^* \wedge \dd\star\zeta
+\nonumber \\
+&=
+\int \DD \eta^* \wedge \star \zeta +
+	\eta^* \wedge (-)^{k} \ii e A \wedge \star \zeta -
+	(-)^{k} \eta^* \wedge \dd\star\zeta
+\nonumber \\
+&=
+\int \DD \eta^* \wedge \star \zeta - \eta^* \wedge 
+	\star (-)^{k} \star^{-1} \rbr{\dd - \ii e A} \wedge \star \zeta\,.
+\end{align}
+\begin{empheq}[box=\fbox]{align}
+\DD^{\dagger} \zeta = (-)^{k} \star^{-1}
+	\rbr{\dd - \ii e A} \wedge \star \zeta\,.
+\end{empheq}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Maxwell--Klein--Fock--Gordon theory}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\begin{align}
+S = \int -\DD\phi^*\wedge\star\DD\phi - m^2 \phi^*\wedge\star\phi
+	-\frac{1}{2} F \wedge \star F.
+\end{align}
+
+\begin{align}
+\dva \DD\phi = -\ii e \dva A\phi + \DD \dva \phi.
+\end{align}
+
+\begin{align}
+\begin{split}
+\dva\rbr{\DD \phi^*\wedge\star\DD\phi} &= 
+\dd\rbr{\dva\phi^*\wedge\star\DD\phi + \dva\phi\wedge\star\DD\phi^*}
+\\
+&\quad\,+
+\dva\phi^*\wedge\star\DD^{\dagger}\DD\phi +
+\dva\phi\wedge\star\DD^{\dagger}\DD\phi^*
+\\
+&\quad\,+
+\dva A \wedge\rbr{\ii e \rbr{\phi^* \star\DD\phi - \phi\star\DD\phi^*}}\,,
+\end{split}
+\\
+\dva\rbr{F\wedge\star F} &=
+	2 \dd\rbr{\dva A \wedge \star F} - 2 \dva A \wedge \dd {\star F}\,.
+\end{align}
+
+\begin{align}
+\dva S &= \int -\dd\rbr{\dva\phi^*\wedge\star\DD\phi + \dva\phi\wedge\star\DD\phi^* + \dva A \wedge\star F}
+\nonumber \\
+&\quad\,+
+\dva\phi^*\wedge\star\rbr{\DD^{\dagger}\DD-m^2}\phi +
+\dva\phi\wedge\star\rbr{\DD^{\dagger}\DD-m^2}\phi^* +
+\nonumber \\
+&\quad\,+
+\dva A\wedge\rbr{-\dd{\star F} +
+	\ii e \rbr{\phi^* \star\DD\phi - \phi \star\DD\phi^*}}.
+\end{align}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\subsection{Lorenz gauge}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\begin{align}
+\square^2 \coloneqq \rbr{\dd + \dd^{\dagger}}^2 = \dd \dd^{\dagger} + \dd^{\dagger} \dd.
+\end{align}
+\begin{align}
+\dd{\star F} = \dd\star \dd A = \star (-)^2 \star^{-1}\dd\star\dd A = \star \dd^{\dagger} \dd A = \star\rbr{\square^2 - \dd \dd^{\dagger}} A\,.
+\end{align}
+One would like to have $\dd \dd^{\dagger} A = 0$, or $\dd^{\dagger} A = \text{const}$. This would be fulfiled if
+\begin{align}
+\dd^{\dagger} A = 0\,,
+\end{align}
+which is the Lorenz gauge\cite{Lorenz1867,Bladel1991a,Bladel1991b}.
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+\section{Free Klein--Fock--Gordon equation in $(d+1)$-dimensions}
+
+%1234567890123456789012345678901234567890123456789012345678901234567890123456789
+In the absence of external electromagnetic field and Cartesian coordinates,
+\begin{align}
+0 = \rbr{\DD^{\dagger} \DD - m^2}\phi =
+	\rbr{-\partial_t^2+\partial_x^2 - m^2}\phi\,.
+\end{align}
+
+Linearly independent solutions are
+\begin{align}
+\rfun{\exp}{\pm\ii\rbr{-\omega_{\vec{k}} t + \vec{k}\cdot\vec{x}}}\,,
+\qquad
+\omega_{\vec{k}} = \sqrt{\vec{k}^2 + m^2}\,.
+\end{align}
+
+One uses the Noether charge to normalise, which reads
+\begin{align}
+\rbr{\phi_1, \phi_2} = \int \dd^d x\, j^{0}
+\end{align}
+gives
+\begin{align}
+\rfun{\phi_{+}}{\omega_{\vec{k}},\vec{k}; t, x} = 
+\frac{1}{\sqrt{2\omega_{\vec{k}}}}
+\rfun{\exp}{+\ii\rbr{-\omega_{\vec{k}} t + \vec{k}\cdot\vec{x}}}\,,
+\qquad
+\rfun{\phi_{-}}{\omega_{\vec{k}},\vec{k}; t, x} =
+\frac{1}{\sqrt{2\omega_{\vec{k}}}}
+\rfun{\exp}{-\ii\rbr{-\omega_{\vec{k}} t + \vec{k}\cdot\vec{x}}}\,,
+\end{align}
+
+
+%\input{sections/intro}
+%\printbibliography[segment=1,heading=subbibintoc]
+
+
+% Let's print the overall heading of the bibliography first:
+%\printbibheading
+%\printbibliography
+
+\end{document}
