@@ -59,7 +59,7 @@ shapes.geometric}
 % \setcounter{secnumdepth}{6}
 % So that paragraph is also numbered
 
-\numberwithin{equation}{subsection}
+\numberwithin{equation}{section}
 
 \title{Wightman function of Klein--Fock--Gordon field}
 \author{Yi-Fan Wang}
@@ -211,10 +211,10 @@ gives
 
 For $d \ge 2$,
 \begin{align}
-%&\quad\,
+&\quad\,
 \int \frac{\dd^d k}{\rbr{2\pp}^d} \frac{1}{2\omega_{\vec{k}}}
 \ee^{+\ii \rbr{-\omega\,\Delta t + \vec{k}\cdot\mupDelta\vec{x}}}
-%\nonumber \\
+\nonumber \\
 &=
 \int_{0}^{+\infty} \frac{\dd k}{\rbr{2\pp}^d}
 	\frac{k^{d-1}\ee^{-\ii \omega_{\vec{k}}\,\mupDelta t}}{2\omega_{\vec{k}}}
@@ -272,17 +272,58 @@ The inner integral in \cref{eq:to-be-besselJ-1} turns to be
 using \cite[eq.\ (10.9.4)]{NIST:DLMF}. Now \cref{eq:to-be-besselJ-1} turns to 
 be
 \begin{align}
+&\quad\,
 \int_{0}^{+\infty} \frac{\dd k}{\rbr{2\pp}^{\frac{d}{2}}}
 	\frac{k^{d-1}\ee^{-\ii \omega_{\vec{k}}\,\mupDelta t}}{2\omega_{\vec{k}}}
 	\frac{\rfun{J_{\frac{d}{2}-1}}{k\,\mupDelta x}}%
-	{\rbr{k\,\mupDelta x}^{{\frac{d}{2}-1}}}\,.
+	{\rbr{k\,\mupDelta x}^{{\frac{d}{2}-1}}}
+\nonumber \\
+&=
+\frac{m^{d-1}}{2\rbr{2\pp}^{\frac{d}{2}}}
+\int_{0}^{+\infty} \dd z\,z^{d-1}
+	\frac{\ee^{-\ii \sqrt{z^2+1}\,\tau}}{\sqrt{z^2+1}}
+	\frac{\rfun{J_{\frac{d}{2}-1}}{\lambda z}}%
+	{\rbr{\lambda z}^{{\frac{d}{2}-1}}}\,,
 \end{align}
+$z = k/m$, $\lambda = m\,\mupDelta x$, $\tau = m\,\mupDelta t$.
 
-For $\mupDelta t > \mupDelta x$, choose a frame in which $\mupDelta x = 0$.
-Using \cite[eq.\ (10.2.2)]{NIST:DLMF}, one has
+For $\mupDelta t > \mupDelta x$, choose a reference frame in which 
+$\mupDelta x = 0$. Using \cite[eq.\ (10.2.2)]{NIST:DLMF}, one has
 \begin{align}
-\lim_{x\to 0}\frac{\rfun{J_{\nu}}{k\,\mupDelta x}}%
-	{\rbr{k\,\mupDelta x}^{{\nu}}} = \frac{1}{2^{\nu}\rfun{\Gamma}{\nu+1}}
+\lim_{\lambda \to 0}\frac{\rfun{J_{\nu}}{\lambda z}}%
+	{\rbr{\lambda z}^{{\nu}}} = \frac{1}{2^{\nu}\rfun{\Gamma}{\nu+1}}\,.
+\end{align}
+\Cref{eq:to-be-besselJ-1} turns to be
+\begin{align}
+&\quad\,
+\frac{m^{d-1}}{4\rbr{4\pp}^{\frac{d}{2}}\rfun{\Gamma}{\frac{d}{2}}}
+\int_{0}^{+\infty} \dd z\,z^{d-1}
+	\frac{\ee^{-\ii \sqrt{z^2+1}\,\tau}}{\sqrt{z^2+1}}
+\nonumber \\
+&=
+\frac{m^{d-1}}{\rbr{4\pp}^{\frac{d}{2}}\rfun{\Gamma}{\frac{d}{2}}}
+\int_{1}^{+\infty} \dd x\,\rbr{x^2-1}^{\frac{d}{2}-1} \ee^{-\ii \tau x}\,.
+\end{align}
+Using \cite[eq.\ (10.32.8) and (10.27.8)]{NIST:DLMF} yields
+\begin{align}
+\frac{\pp^{\frac{1}{2}} \rbr{\frac{\ii \tau}{2}}^{\nu}}%
+	{\rfun{\Gamma}{\nu+\frac{1}{2}}}
+\int_{1}^{+\infty} \dd x\,\rbr{x^2-1}^{\nu-\frac{1}{2}}\ee^{-\ii \tau x}
+= \rfun{K_{\nu}}{\ii \tau} = \frac{\pp}{2}\ee^{-\ii \frac{\pp}{2}\rbr{\nu+1}}
+\rfun{H_{\nu}^{(2)}}{\tau}\,,
+\end{align}
+which requires $-\pp < \arg \tau < 0$, i.e.\ $\tau$ at least has a small
+negative imaginary part. \Cref{eq:to-be-besselJ-1} finally turns to be
+\begin{align}
+\frac{1}{4} 
+\rbr{-\frac{\ii m}{2\pp \rbr{-\sigma}^{\frac{1}{2}}}}^{\frac{d-1}{2}}
+\rfun{H^{(2)}_{\frac{d-1}{2}}}{m \rbr{-\sigma}^{\frac{1}{2}}}\,,
+\qquad
+\sigma = -\rbr{\mupDelta t}^2 + \rbr{\mupDelta \vec{x}}^2\,,
+\\
+\Re\sigma < 0\,,
+\qquad
+\Im\rbr{-\sigma}^{\frac{1}{2}} < 0\,.
 \end{align}
 
 %\input{sections/intro}
@@ -290,7 +331,6 @@ Using \cite[eq.\ (10.2.2)]{NIST:DLMF}, one has
 
 
 % Let's print the overall heading of the bibliography first:
-\printbibheading
 \printbibliography
 
 \end{document}
